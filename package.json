@@ -1,0 +1,27 @@
+{
+  "name": "sistemarecursoshumanosnodejs",
+  "version": "1.0.0",
+  "description": "Human Resources System for Taller de NodeJS SA de CV",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnaGVF/SistemaRecursosHumanosNodeJS.git"
+  },
+  "keywords": [
+    "express",
+    "nodejs",
+    "taller"
+  ],
+  "author": "Ana Vassallo, César Balderas, Ignacio Cárdenas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnaGVF/SistemaRecursosHumanosNodeJS/issues"
+  },
+  "homepage": "https://github.com/AnaGVF/SistemaRecursosHumanosNodeJS#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
