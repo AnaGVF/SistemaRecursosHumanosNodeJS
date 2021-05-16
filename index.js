@@ -12,9 +12,15 @@ const app = express();
 
 app.get("/", (req, res, next) => {
     res.status(200);
-    res.send("Bienvenido");
+    res.send("¡Bienvenid@!");
 });
 
-app.listen(3000, () => {
+app.get("/:name", (req, res, next) => {
+    console.log(req.params.name);
+    res.status(200);
+    res.send("Estás en la página: " + req.params.name);
+})
+
+app.listen(process.env.PORT || 3000, () => {
     console.log("Server is running...");
 });
