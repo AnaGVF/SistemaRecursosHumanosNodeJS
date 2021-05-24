@@ -3,19 +3,19 @@ const empleados = express.Router();
 const db = require('../config/database');
 
 empleados.post("/create",async (req, res, next) => {
-    // const {nombre, apellidos, telefono, email, direccion} = req.body;
+    const {nombre, apellidos, telefono, email, direccion} = req.body;
     console.log(req.body);
-    // if(nombre && apellidos && telefono && email && direccion) {
-    //     let query = "INSERT INTO empleados(nombre,apellidos,telefono,email,direccion)";
-    //     query += `VALUES('${nombre}',${apellidos},${telefono},'${direccion},${email}')`;
-    //     const rows = await db.query(query);
+    if(nombre && apellidos && telefono && email && direccion) {
+        let query = "INSERT INTO empleados(nombre,apellidos,telefono,email,direccion)";
+        query += `VALUES('${nombre}','${apellidos}',${telefono},'${direccion}','${email}')`;
+        const rows = await db.query(query);
 
-    //     if(rows.affectedRows == 1){
-    //         return res.status(201).json({code:201, message: "Empleado insertado correctamente"});
-    //     }
+        if(rows.affectedRows == 1){
+            return res.status(201).json({code:201, message: "Empleado insertado correctamente"});
+        }
 
-    //     return res.status(500).json({code:500, message:"Ocurrió un error"});
-    // }
+        return res.status(500).json({code:500, message:"Ocurrió un error"});
+    }
     
 });
 
@@ -34,8 +34,8 @@ empleados.put('/:id([0-9]{1,3})', async(req,res,next)=>{
     const {nombre, apellidos, telefono, email, direccion} = req.body
 
     if(nombre, apellidos, telefono, email, direccion){
-        let query = `UPDATE empleados SET nombre = '${nombre}',apellidos=${apellidos},`;
-        query += `telefono=${telefono}, email=${email}, direccion=${direccion} WHERE id=${req.params.id}`;
+        let query = `UPDATE empleados SET nombre = '${nombre}',apellidos='${apellidos}',`;
+        query += `telefono=${telefono}, email='${email}', direccion='${direccion}' WHERE id=${req.params.id}`;
 
         const rows = await db.query(query);
 

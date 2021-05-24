@@ -8,7 +8,7 @@ function init() {
 
         document.querySelector('.btn-primary').addEventListener('click', login);
     } else {
-        window.location.href = "pokedex.html";
+        window.location.href = "sistemaUI.html";
     }
 }
 
