@@ -4,7 +4,7 @@ const user = express.Router();
 const db = require('../config/database');
 
 user.post("/signin", async (req, res, next) => {
-    const { username, pass, first_name, last_name } = req.body;
+    const { username, pass, first_name, last_name } = req.body
 
     if(username && pass && first_name && last_name) {
         let query = "INSERT INTO usuarios(username, pass, first_name, last_name) "

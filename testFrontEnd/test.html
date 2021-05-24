@@ -14,6 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="test.js"></script>
 
+
 </head>
 <body>
     <div class="container">
@@ -66,8 +67,8 @@
 							</td>
 							<td>Ignacio</td>
 							<td>Cardenas</td>
-							<td>Facultad de Informática</td>
 							<td>(442) 123 4567</td>
+							<td>Facultad de Informática</td>
 							<td>igcard@mail.com</td>
 							<td>
 								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -94,7 +95,7 @@
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form method="POST" action="http://localhost:3000/empleados/create">
 					<div class="modal-header">						
 						<h4 class="modal-title">Añadir Empleado</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -102,23 +103,23 @@
 					<div class="modal-body">					
 						<div class="form-group">
 							<label>Nombre</label>
-							<input type="text" class="form-control" required>
+							<input name="Nombre" type="text"  class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Apellido</label>
-							<input type="text" class="form-control" required>
+							<input name="Apellido" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Teléfono</label>
-							<input type="text" class="form-control" required>
+							<input name="Telefono" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Dirección</label>
-							<textarea class="form-control" required></textarea>
+							<textarea name="Direccion" class="form-control" required></textarea>
 						</div>
 						<div class="form-group">
 							<label>Correo</label>
-							<input type="email" class="form-control" required>
+							<input name="Correo" type="email" class="form-control" required>
 						</div>
 					</div>
 					<div class="modal-footer">
