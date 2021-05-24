@@ -2,11 +2,11 @@ window.onload = init;
 
 function init() {
     if(!localStorage.getItem("token")) {    
-        document.querySelector('.btn-secondary').addEventListener('click', function() {
+        document.querySelector('.irLogin').addEventListener('click', function() {
             window.location.href = "login.html";
         });
 
-        document.querySelector('.btn-primary').addEventListener('click', signin);
+        document.querySelector('.btn-success').addEventListener('click', signin);
     } else {
         window.location.href = "sistemaUI.html";
     }
