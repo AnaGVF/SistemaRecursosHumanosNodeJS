@@ -60,26 +60,24 @@ function getData() {
 }
 
 function insertData() {
-	var name = document.getElementsByName("nombre");
-	var lastName = document.getElementsByName("apellido");
-	var phone = document.getElementsByName("telefono");
-	var correo = document.getElementsByName("correo");
-	var direccion = document.getElementsByName("direccion");
-
+	var name = document.getElementById("Nombre").value;
+	var lastName = document.getElementById("Apellido").value;
+	var phone = document.getElementById("Telefono").value;
+	var correo = document.getElementById("Correo").value;
+	var direccion = document.getElementById("Direccion").value;
 
 	axios({
 		method: 'post',
-		url: 'http://localhost:3000/empleados/',
+		url: 'http://localhost:3000/empleados/create',
 		data: {
 			nombre: name,
 			apellidos: lastName,
 			telefono: phone,
-			correo: correo,
+			email: correo,
 			direccion: direccion
 		}
-	}).then(function (res) {
-
-		res.data.message.forEach(element => {
+	}).then(function(res) {
+		res.data.message.forEach((element) => {
 			console.log(element);
 			let html = '<tr>'
 				+ '<td>'
@@ -99,21 +97,21 @@ function insertData() {
 				+ '</td>'
 				+ '</tr>';
 			$('#tablaEmpleados > tbody').append(html);
-
 		});
-
 	}).catch(function (err) {
 		console.log(err);
 	});
 }
 
 function removeData() {
+	var elementoBorrar = document.getElementsByClassName("delete");
+	console.log(elementoBorrar);
 	axios({
 		method: 'delete',
-		url: 'http://localhost:3000/empleados/'
+		url: 'http://localhost:3000/empleados/'	
 	}).then(function (res) {
 
-		res.data.message.forEach(element => {
+		res.data.message.forEach((element) => {
 			console.log(element);
 			let html = '<tr>'
 				+ '<td>'

@@ -7,7 +7,7 @@ empleados.post("/create",async (req, res, next) => {
     console.log(req.body);
     if(nombre && apellidos && telefono && email && direccion) {
         let query = "INSERT INTO empleados(nombre,apellidos,telefono,email,direccion)";
-        query += `VALUES('${nombre}','${apellidos}',${telefono},'${direccion}','${email}')`;
+        query += `VALUES('${nombre}','${apellidos}','${telefono}','${email}','${direccion}')`;
         const rows = await db.query(query);
 
         if(rows.affectedRows == 1){
@@ -15,8 +15,7 @@ empleados.post("/create",async (req, res, next) => {
         }
 
         return res.status(500).json({code:500, message:"Ocurrió un error"});
-    }
-    
+    }    
 });
 
 empleados.delete('/:id([0-9]{1,3})',async(req,res,next)=>{

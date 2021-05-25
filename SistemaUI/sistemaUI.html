@@ -78,7 +78,7 @@
             </div>            
 		</div>        
     </div>
-	<!-- Edit Modal HTML -->
+	<!-- Add Modal HTML -->
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -90,28 +90,28 @@
 					<div class="modal-body">					
 						<div class="form-group">
 							<label>Nombre</label>
-							<input name="Nombre" type="text"  class="form-control" required>
+							<input id="Nombre" name="Nombre" type="text"  class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Apellido</label>
-							<input name="Apellido" type="text" class="form-control" required>
+							<input id="Apellido" name="Apellido" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Teléfono</label>
-							<input name="Telefono" type="text" class="form-control" required>
+							<input id="Telefono" name="Telefono" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Correo</label>
-							<input name="Correo" type="email" class="form-control" required>
+							<input id="Correo" name="Correo" type="email" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Dirección</label>
-							<textarea name="Direccion" class="form-control" required></textarea>
+							<textarea id="Direccion" name="Direccion" class="form-control" required></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-success" onclick="insertData" value="Agregar">
+						<input type="submit" class="btn btn-success" onclick="insertData()" value="Agregar">
 					</div>
 				</form>
 			</div>
@@ -171,7 +171,7 @@
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-danger" onclick="removeData" value="Eliminar">
+						<input type="submit" class="btn btn-danger" onclick="removeData()" value="Eliminar">
 					</div>
 				</form>
 			</div>
