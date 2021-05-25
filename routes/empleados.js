@@ -39,7 +39,7 @@ empleados.put('/:id([0-9]{1,3})', async(req,res,next)=>{
         const rows = await db.query(query);
 
         if(rows.affectedRows == 1){
-            return res.status(200).json({code:200, message:"Empleado acualizado correctamente"});
+            return res.status(200).json({code:200, message:"Empleado actualizado correctamente"});
         }
         return res.status(500).json({code:500, message:"Ocurrió un error"});
     }

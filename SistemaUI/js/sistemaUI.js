@@ -1,5 +1,6 @@
+//const { get } = require("../../routes/empleados");
 
-
+var employeeSelected;
 $(document).ready(function () {
 	getData();
 	// Activate tooltip
@@ -30,7 +31,7 @@ function getData() {
 		method: 'get',
 		url: 'http://localhost:3000/empleados/'
 	}).then(function (res) {
-
+		
 		res.data.message.forEach(element => {
 			console.log(element);
 			let html = '<tr>'
@@ -46,7 +47,7 @@ function getData() {
 				+ '<td>' + element.email + '</td>'
 				+ '<td>' + element.direccion + '</td>'
 				+ '<td>'
-				+ '<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>'
+				+ "<a href='#editEmployeeModal' class='edit' onclick='prepareModalData("+element.id+", this)' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' data-original-title='Edit'></i></a>"
 				+ '<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>'
 				+ '</td>'
 				+ '</tr>';
@@ -57,6 +58,16 @@ function getData() {
 	}).catch(function (err) {
 		console.log(err);
 	});
+}
+
+function prepareModalData(id, event){
+	console.log("click");
+	employeeSelected = id;
+	$("#editNombre").val($(event).closest('tr').find('td')[1].innerText);
+	$("#editApellido").val($(event).closest('tr').find('td')[2].innerText);
+	$("#editTelefono").val($(event).closest('tr').find('td')[3].innerText);
+	$("#editCorreo").val($(event).closest('tr').find('td')[4].innerText);
+	$("#editDireccion").val($(event).closest('tr').find('td')[5].innerText);
 }
 
 function insertData() {
@@ -77,27 +88,9 @@ function insertData() {
 			direccion: direccion
 		}
 	}).then(function(res) {
-		res.data.message.forEach((element) => {
-			console.log(element);
-			let html = '<tr>'
-				+ '<td>'
-				+ '<span class="custom-checkbox">'
-				+ '<input type="checkbox" id="checkbox1" name="options[]" value="1">'
-				+ '<label for="checkbox1"></label>'
-				+ '</span>'
-				+ '</td>'
-				+ '<td>' + element.nombre + '</td>'
-				+ '<td>' + element.apellidos + '</td>'
-				+ '<td>' + element.telefono + '</td>'
-				+ '<td>' + element.email + '</td>'
-				+ '<td>' + element.direccion + '</td>'
-				+ '<td>'
-				+ '<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>'
-				+ '<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>'
-				+ '</td>'
-				+ '</tr>';
-			$('#tablaEmpleados > tbody').append(html);
-		});
+		getData();
+		$('#addEmployeeModal').modal('hide');
+		
 	}).catch(function (err) {
 		console.log(err);
 	});
@@ -111,28 +104,8 @@ function removeData() {
 		url: 'http://localhost:3000/empleados/'	
 	}).then(function (res) {
 
-		res.data.message.forEach((element) => {
-			console.log(element);
-			let html = '<tr>'
-				+ '<td>'
-				+ '<span class="custom-checkbox">'
-				+ '<input type="checkbox" id="checkbox1" name="options[]" value="1">'
-				+ '<label for="checkbox1"></label>'
-				+ '</span>'
-				+ '</td>'
-				+ '<td>' + element.nombre + '</td>'
-				+ '<td>' + element.apellidos + '</td>'
-				+ '<td>' + element.telefono + '</td>'
-				+ '<td>' + element.email + '</td>'
-				+ '<td>' + element.direccion + '</td>'
-				+ '<td>'
-				+ '<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>'
-				+ '<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>'
-				+ '</td>'
-				+ '</tr>';
-			$('#tablaEmpleados > tbody').append(html);
-
-		});
+	getData();
+	$('#deleteEmployeeModal').modal('hide');
 
 	}).catch(function (err) {
 		console.log(err);
@@ -158,28 +131,9 @@ function updateData() {
 		}
 	}).then(function (res) {
 
-		res.data.message.forEach(element => {
-			console.log(element);
-			let html = '<tr>'
-				+ '<td>'
-				+ '<span class="custom-checkbox">'
-				+ '<input type="checkbox" id="checkbox1" name="options[]" value="1">'
-				+ '<label for="checkbox1"></label>'
-				+ '</span>'
-				+ '</td>'
-				+ '<td>' + element.nombre + '</td>'
-				+ '<td>' + element.apellidos + '</td>'
-				+ '<td>' + element.telefono + '</td>'
-				+ '<td>' + element.email + '</td>'
-				+ '<td>' + element.direccion + '</td>'
-				+ '<td>'
-				+ '<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Edit"></i></a>'
-				+ '<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>'
-				+ '</td>'
-				+ '</tr>';
-			$('#tablaEmpleados > tbody').append(html);
-
-		});
+	getData();
+	$('#editEmployeeModal').modal('hide');
+	
 
 	}).catch(function (err) {
 		console.log(err);

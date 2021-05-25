@@ -82,7 +82,7 @@
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form method="POST" action="http://localhost:3000/empleados/create">
+				<form>
 					<div class="modal-header">						
 						<h4 class="modal-title">Añadir Empleado</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -129,28 +129,28 @@
 					<div class="modal-body">					
 						<div class="form-group">
 							<label>Nombre</label>
-							<input type="text" class="form-control" required>
+							<input id="editNombre" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Apellido</label>
-							<input type="text" class="form-control" required>
+							<input id="editApellido" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Teléfono</label>
-							<input type="text" class="form-control" required>
+							<input id="editTelefono" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Correo</label>
-							<input type="email" class="form-control" required>
+							<input id="editCorreo" type="email" class="form-control" required>
 						</div>					
 						<div class="form-group">
 							<label>Dirección</label>
-							<textarea class="form-control" required></textarea>
+							<textarea id="editDireccion" class="form-control" required></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-info" onclick="updateData"value="Guardar">
+						<input type="submit" class="btn btn-info" onclick="updateData()"value="Guardar">
 					</div>
 				</form>
 			</div>
