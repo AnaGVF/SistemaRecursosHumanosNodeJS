@@ -4,7 +4,7 @@ const user = express.Router();
 const db = require('../config/database');
 
 user.post("/signin", async (req, res, next) => {
-    const { username, pass, first_name, last_name } = req.body
+    const { username, pass, first_name, last_name } = req.body;
 
     if(username && pass && first_name && last_name) {
         let query = "INSERT INTO usuarios(username, pass, first_name, last_name) "
@@ -33,7 +33,7 @@ user.post("/login", async (req, res, next) => {
             }, "debugkey");
             return res.status(200).json({ code: 200, message: token });
         } else {
-            return res.status(200).json({ code: 200, message: "Usuario y/o contraseña incorrectos" });
+            return res.status(401).json({ code: 401, message: "Usuario y/o contraseña incorrectos" });
         }
     } 
     return res.status(500).json({ code: 500, message: "Campos incompletos" });  

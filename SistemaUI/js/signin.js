@@ -17,6 +17,7 @@ function signin() {
     var first_name = document.getElementById("input-first_name").value;
     var last_name = document.getElementById("input-last_name").value;
     var pass = document.getElementById("input-password").value;
+    var alertaMala = document.querySelector("#data-alert");
 
     axios({
         method: 'post',
@@ -28,10 +29,12 @@ function signin() {
             pass: pass
         }
     }).then(function(res) {
-        console.log(res);
+        console.log(res);   
         alert("Registro exitoso");
         window.location.href = "login.html";
     }).catch(function(err) {
+        alertaMala.classList.remove("hideAlert");
+        alertaMala.classList.add("show");
         console.log(err);
     })
 }
