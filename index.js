@@ -31,12 +31,6 @@ app.use("/user", user);
 app.use("/empleados", empleados);
 app.use(notFound);
 
-// app.get("/:name", (req, res, next) => {
-//     console.log(req.params.name);
-//     res.status(200);
-//     res.send("Estás en la página: " + req.params.name);
-// })
-
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server is running...");
 });

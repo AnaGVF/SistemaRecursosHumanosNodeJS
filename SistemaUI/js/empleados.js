@@ -26,9 +26,9 @@ function loadEmpleados() {
     })
 }
 
-function displayEmpleados(empleado) {
-    var body = document.querySelector("body");
-    for(var i = 0; i < empleado.length; i++) {
-        body.innerHTML += `<h3>${empleado[i].nombre} </h3>`;
-    }
-}
+// function displayEmpleados(empleado) {
+//     var body = document.querySelector("body");
+//     for(var i = 0; i < empleado.length; i++) {
+//         body.innerHTML += `<h3>${empleado[i].nombre} </h3>`;
+//     }
+// }

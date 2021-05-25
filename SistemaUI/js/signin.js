@@ -35,6 +35,9 @@ function signin() {
     }).catch(function(err) {
         alertaMala.classList.remove("hideAlert");
         alertaMala.classList.add("show");
+        setTimeout(function(){
+            location.reload(); 
+        }, 2000);
         console.log(err);
     })
 }
