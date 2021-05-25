@@ -113,15 +113,16 @@ function removeData() {
 }
 
 function updateData() {
+	var id = document.getElementsByName("id");
 	var name = document.getElementsByName("nombre");
 	var lastName = document.getElementsByName("apellido");
 	var phone = document.getElementsByName("telefono");
 	var correo = document.getElementsByName("correo");
 	var direccion = document.getElementsByName("direccion");
-
+	let url = 'http://localhost:3000/empleados/';
 	axios({
 		method: 'put',
-		url: 'http://localhost:3000/empleados/',
+		url: url,
 		data: {
 			nombre: name,
 			apellidos: lastName,
@@ -149,16 +150,17 @@ function myFunction() {
 	tr = table.getElementsByTagName('tr');
 
 	// Loop through all list items, and hide those who don't match the search query
-	for (i = 0; i < td.length; i++) {
+	for (i = 0; i < tr.length; i++) {
 		td = tr[i].getElementsByTagName("td")[0];
-		txtValue = td.textContent || td.innerText;
-		if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		if (td) {
+		  txtValue = td.textContent || td.innerText;
+		  if (txtValue.toUpperCase().indexOf(filter) > -1) {
 			tr[i].style.display = "";
-		} else {
+		  } else {
 			tr[i].style.display = "none";
+		  }
 		}
-
-	}
+	  }
 }
 
 function logout() {
