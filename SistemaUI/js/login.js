@@ -14,7 +14,7 @@ function init() {
 function login() {
     var username = document.getElementById("input-username").value;
     var pass = document.getElementById("input-password").value;
-    var alertaMala = document.querySelector("#data-alert");    
+    var alertaMala = document.querySelector("#data-alert");     
 
     axios({
         method: 'post',
