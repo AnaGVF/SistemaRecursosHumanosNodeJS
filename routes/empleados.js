@@ -29,12 +29,12 @@ empleados.delete('/:id([0-9]{1,3})',async(req,res,next)=>{
     res.status(404).json({code:404, message:"Empleado no encontrado"});
 });
 
-empleados.put('/:id([0-9]{1,3})', async(req,res,next)=>{
-    const {nombre, apellidos, telefono, email, direccion} = req.body
+empleados.put('/update', async(req,res,next)=>{
+    const {id, nombre, apellidos, telefono, email, direccion} = req.body
 
-    if(nombre, apellidos, telefono, email, direccion){
+    if(id, nombre, apellidos, telefono, email, direccion){
         let query = `UPDATE empleados SET nombre = '${nombre}',apellidos='${apellidos}',`;
-        query += `telefono=${telefono}, email='${email}', direccion='${direccion}' WHERE id=${req.params.id}`;
+        query += `telefono=${telefono}, email='${email}', direccion='${direccion}' WHERE id=${id}`;
 
         const rows = await db.query(query);
 

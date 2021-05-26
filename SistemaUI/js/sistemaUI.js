@@ -23,41 +23,20 @@ $(document).ready(function () {
 	// Activar tooltip
 	$('[data-toggle="tooltip"]').tooltip();
 
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function () {
-		if (this.checked) {
-			checkbox.each(function () {
-				this.checked = true;
-			});
-		} else {
-			checkbox.each(function () {
-				this.checked = false;
-			});
-		}
-	});
-	checkbox.click(function () {
-		if (!this.checked) {
-			$("#selectAll").prop("checked", false);
-		}
-	});
 });
 
 function getData() {
 	axios({
 		method: 'get',
-		url: 'http://localhost:3000/empleados/'
+		url: 'http://localhost:3000/empleados/',
+		headers: {
+			'Authorization': "bearer " + localStorage.getItem("token")
+		}
 	}).then(function (res) {
-		
+		$("#tablaEmpleados > tbody").empty();
 		res.data.message.forEach(element => {
 			console.log(element);
 			let html = '<tr>'
-				+ '<td>'
-				+ '<span class="custom-checkbox">'
-				+ '<input type="checkbox" id="checkbox1" name="options[]" value="1">'
-				+ '<label for="checkbox1"></label>'
-				+ '</span>'
-				+ '</td>'
 				+ '<td>' + element.nombre + '</td>'
 				+ '<td>' + element.apellidos + '</td>'
 				+ '<td>' + element.telefono + '</td>'
@@ -65,7 +44,7 @@ function getData() {
 				+ '<td>' + element.direccion + '</td>'
 				+ '<td>'
 				+ "<a href='#editEmployeeModal' class='edit' onclick='prepareModalData("+element.id+", this)' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' data-original-title='Edit'></i></a>"
-				+ '<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>'
+				+ '<a href="#deleteEmployeeModal" class="delete" onclick="prepareModalDeletion('+element.id+')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>'
 				+ '</td>'
 				+ '</tr>';
 			$('#tablaEmpleados > tbody').append(html);
@@ -80,11 +59,16 @@ function getData() {
 function prepareModalData(id, event){
 	console.log("click");
 	employeeSelected = id;
-	$("#editNombre").val($(event).closest('tr').find('td')[1].innerText);
-	$("#editApellido").val($(event).closest('tr').find('td')[2].innerText);
-	$("#editTelefono").val($(event).closest('tr').find('td')[3].innerText);
-	$("#editCorreo").val($(event).closest('tr').find('td')[4].innerText);
-	$("#editDireccion").val($(event).closest('tr').find('td')[5].innerText);
+	$("#editNombre").val($(event).closest('tr').find('td')[0].innerText);
+	$("#editApellido").val($(event).closest('tr').find('td')[1].innerText);
+	$("#editTelefono").val($(event).closest('tr').find('td')[2].innerText);
+	$("#editCorreo").val($(event).closest('tr').find('td')[3].innerText);
+	$("#editDireccion").val($(event).closest('tr').find('td')[4].innerText);
+}
+
+function prepareModalDeletion(id){
+	console.log("click eliminar");
+	employeeSelected = id;
 }
 
 // Insertar Datos 
@@ -104,6 +88,9 @@ function insertData() {
 			telefono: phone,
 			email: correo,
 			direccion: direccion
+		},
+		headers: {
+			'Authorization': "bearer " + localStorage.getItem("token")
 		}
 	}).then(function(res) {
 		getData();
@@ -119,7 +106,10 @@ function removeData() {
 	console.log(elementoBorrar);
 	axios({
 		method: 'delete',
-		url: 'http://localhost:3000/empleados/'	
+		url: 'http://localhost:3000/empleados/'+employeeSelected,
+		headers: {
+			'Authorization': "bearer " + localStorage.getItem("token")
+		}	
 	}).then(function (res) {
 
 	getData();
@@ -132,22 +122,26 @@ function removeData() {
 
 // Modificar Datos 
 function updateData() {
-		var id = document.getElementById("id");
-		var name = document.getElementsByName("nombre");
-		var lastName = document.getElementsByName("apellido");
-		var phone = document.getElementsByName("telefono");
-		var correo = document.getElementsByName("correo");
-		var direccion = document.getElementsByName("direccion");
-		let url = 'http://localhost:3000/empleados/:'+id+'';
+		
+		var name = document.getElementById("editNombre").value;
+		var lastName = document.getElementById("editApellido").value;
+		var phone = document.getElementById("editTelefono").value;
+		var correo = document.getElementById("editCorreo").value;
+		var direccion = document.getElementById("editDireccion").value;
+		
 	axios({
 		method: 'put',
-		url: url,
+		url: 'http://localhost:3000/empleados/update',
 		data: {
+			id: employeeSelected,
 			nombre: name,
 			apellidos: lastName,
 			telefono: phone,
-			correo: correo,
+			email: correo,
 			direccion: direccion
+		},
+		headers: {
+			'Authorization': "bearer " + localStorage.getItem("token")
 		}
 	}).then(function (res) {
 
@@ -169,7 +163,7 @@ function myFunction() {
 
 	// Ciclar todos los items y esconder los que no cumplen con la búsqueda
 	for (i = 0; i < tr.length; i++) {
-		td = tr[i].getElementsByTagName("td")[i];
+		td = tr[i].getElementsByTagName("td")[0];
 		if (td) {
 		  txtValue = td.textContent || td.innerText;
 		  if (txtValue.toUpperCase().indexOf(filter) > -1) {
