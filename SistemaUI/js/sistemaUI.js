@@ -1,9 +1,26 @@
 //const { get } = require("../../routes/empleados");
 
+window.onload = init;
+var headers = {};
+var url = "http://localhost:3000";
+
+function init() {
+    if(localStorage.getItem("token")) {
+        token = localStorage.getItem("token");
+        headers = {
+            headers: {
+                'Authorization': "bearer " + localStorage.getItem("token")
+            }
+        }
+    } else {
+        window.location.href = "index.html";
+    }
+}
+
 var employeeSelected;
 $(document).ready(function () {
 	getData();
-	// Activate tooltip
+	// Activar tooltip
 	$('[data-toggle="tooltip"]').tooltip();
 
 	// Select/Deselect checkboxes
@@ -70,6 +87,7 @@ function prepareModalData(id, event){
 	$("#editDireccion").val($(event).closest('tr').find('td')[5].innerText);
 }
 
+// Insertar Datos 
 function insertData() {
 	var name = document.getElementById("Nombre").value;
 	var lastName = document.getElementById("Apellido").value;
@@ -89,13 +107,13 @@ function insertData() {
 		}
 	}).then(function(res) {
 		getData();
-		$('#addEmployeeModal').modal('hide');
-		
+		$('#addEmployeeModal').modal('hide');		
 	}).catch(function (err) {
 		console.log(err);
 	});
 }
 
+// Borrar Datos 
 function removeData() {
 	var elementoBorrar = document.getElementsByClassName("delete");
 	console.log(elementoBorrar);
@@ -112,6 +130,7 @@ function removeData() {
 	});
 }
 
+// Modificar Datos 
 function updateData() {
 	var id = document.getElementsByName("id");
 	var name = document.getElementsByName("nombre");
@@ -133,8 +152,7 @@ function updateData() {
 	}).then(function (res) {
 
 	getData();
-	$('#editEmployeeModal').modal('hide');
-	
+	$('#editEmployeeModal').modal('hide');	
 
 	}).catch(function (err) {
 		console.log(err);
@@ -142,16 +160,16 @@ function updateData() {
 }
 
 function myFunction() {
-	// Declare variables
+	// Variables
 	var input, filter, td, tr, table, i, txtValue;
 	input = document.getElementById('searchBar');
 	filter = input.value.toUpperCase();
 	table = document.getElementById("tablaEmpleados");
 	tr = table.getElementsByTagName('tr');
 
-	// Loop through all list items, and hide those who don't match the search query
+	// Ciclar todos los items y esconder los que no cumplen con la búsqueda
 	for (i = 0; i < tr.length; i++) {
-		td = tr[i].getElementsByTagName("td")[0];
+		td = tr[i].getElementsByTagName("td")[i];
 		if (td) {
 		  txtValue = td.textContent || td.innerText;
 		  if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -163,8 +181,8 @@ function myFunction() {
 	  }
 }
 
+// Función logout 
 function logout() {
 	window.localStorage.removeItem('token');	
-	console.log("hola");
 	window.location.href = "login.html";
 }

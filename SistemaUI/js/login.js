@@ -11,6 +11,7 @@ function init() {
     }
 }
 
+// Función de Login 
 function login() {
     var username = document.getElementById("input-username").value;
     var pass = document.getElementById("input-password").value;
