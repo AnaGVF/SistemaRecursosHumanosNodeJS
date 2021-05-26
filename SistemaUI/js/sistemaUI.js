@@ -1,5 +1,3 @@
-//const { get } = require("../../routes/empleados");
-
 window.onload = init;
 var headers = {};
 var url = "http://localhost:3000";
@@ -22,9 +20,9 @@ $(document).ready(function () {
 	getData();
 	// Activar tooltip
 	$('[data-toggle="tooltip"]').tooltip();
-
 });
 
+// Obtener los datos de los Empleados 
 function getData() {
 	axios({
 		method: 'get',
@@ -48,14 +46,13 @@ function getData() {
 				+ '</td>'
 				+ '</tr>';
 			$('#tablaEmpleados > tbody').append(html);
-
 		});
-
 	}).catch(function (err) {
 		console.log(err);
 	});
 }
 
+// Preparar Modal Editar 
 function prepareModalData(id, event){
 	console.log("click");
 	employeeSelected = id;
@@ -66,6 +63,7 @@ function prepareModalData(id, event){
 	$("#editDireccion").val($(event).closest('tr').find('td')[4].innerText);
 }
 
+// Preparar Modal Borrar 
 function prepareModalDeletion(id){
 	console.log("click eliminar");
 	employeeSelected = id;
@@ -121,8 +119,7 @@ function removeData() {
 }
 
 // Modificar Datos 
-function updateData() {
-		
+function updateData() {		
 		var name = document.getElementById("editNombre").value;
 		var lastName = document.getElementById("editApellido").value;
 		var phone = document.getElementById("editTelefono").value;
@@ -144,6 +141,7 @@ function updateData() {
 			'Authorization': "bearer " + localStorage.getItem("token")
 		}
 	}).then(function (res) {
+		console.log(url);
 
 	getData();
 	$('#editEmployeeModal').modal('hide');	
@@ -153,7 +151,8 @@ function updateData() {
 	});
 }
 
-function myFunction() {
+// Función Buscador 
+function buscador() {
 	// Variables
 	var input, filter, td, tr, table, i, txtValue;
 	input = document.getElementById('searchBar');
@@ -175,7 +174,7 @@ function myFunction() {
 	  }
 }
 
-// Función logout 
+// Función Logout 
 function logout() {
 	window.localStorage.removeItem('token');	
 	window.location.href = "login.html";
