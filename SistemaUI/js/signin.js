@@ -12,6 +12,7 @@ function init() {
     }
 }
 
+// Función de Signin 
 function signin() {
     var username = document.getElementById("input-username").value;
     var first_name = document.getElementById("input-first_name").value;
