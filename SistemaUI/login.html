@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sistema de Recursos Humanos NodeJS - Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -15,29 +16,47 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row mt-5">
-            <div class="col-6 offset-3">
-                <h1>Inicia sesión</h1>
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-6 offset-3">
-                <div class="form-group">
-                    <label for="input-username">Username</label>
-                    <input type="email" class="form-control" id="input-username" placeholder="correo@dominio.ext">
-                    <small class="form-text text-muted">El username con el que te registraste.</small>
-                </div>
-                <div class="form-group">
-                    <label for="input-password">Contraseña</label>
-                    <input type="password" class="form-control" id="input-password" placeholder="***********">
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button class="btn btn-primary">Entrar</button>
-                    <button class="btn btn-secondary">Registro</button>
-                </div>
-            </div>
-        </div>
+    <div class="alert alert-danger alert-dismissible fade hideAlert" role="alert" id="data-alert" style="margin: 0px;">
+        Usuario y/o contraseña incorrectos
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+
+    <div class="d-flex h-auto">
+        <div class="container d-flex justify-content-center fondo">
+            <img src="img/fondo.jpg" alt="Imagen de Fondo" style="width: 100%;">
+        </div>
+        <div class="container d-flex flex-column justify-content-center segundoContenedor">
+            <div class="row">
+                <div class="col-10 offset-1 mb-3" style="text-align: center;">
+                    <h1 class="mb-5">Sistema de Recursos Humanos Node.js S.A. de C.V.</h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6 offset-3 mb-3" style="text-align: center;">
+                    <h2>Inicio de Sesión</h2>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-6 offset-3">
+                    <div class="form-group">
+                        <label for="input-username">Username</label>
+                        <input type="email" class="form-control" id="input-username" placeholder="johnnyappleseed">
+                        <small class="form-text text-muted">El username con el que te registraste.</small>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="input-password">Contraseña</label>
+                        <input type="password" class="form-control" id="input-password" placeholder="***********">
+                    </div>
+                    <p class="mb-4 irRegistro" style="text-align: center;">¿No tienes una cuenta? Regístrate <b style="cursor: pointer;">aquí</b></p>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success">Iniciar sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 </body>
 </html>

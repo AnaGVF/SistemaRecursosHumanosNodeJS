@@ -5,10 +5,154 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Recursos Humanos NodeJS</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./js/pokedex.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/sistemaUI.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-    <h1>Bienvenido al Sistema de Recursos Humanos NodeJS</h1>
+    <div class="container">
+		<div class="table-responsive">
+			<div class="table-wrapper">
+				<div class="table-title">
+					<div class="row">						
+						<div class="col-xs-6">
+							<h2><b>Empleados</b></h2>
+						</div>						
+						<div class="col-xs-6">							
+							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir Nuevo Empleado</span></a>						
+						</div>						
+					</div>					
+				</div>
+				<div class="search-box">
+					<i class="material-icons">&#xE8B6;</i>
+					<input id="searchBar" onkeyup="buscador()" type="text" class="form-control" placeholder="Buscar&hellip;">
+				</div>
+				<table id="tablaEmpleados" class="table table-striped table-hover">
+					<thead>
+						<tr>							
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Teléfono</th>
+							<th>Correo</th>
+							<th>Dirección</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>						
+				
+					</tbody>
+				</table>
+			</div>
+            <div class="d-flex" style="margin-top: 20px; text-align: -webkit-right;">
+                <button class="btn btn-danger" id="cerrarSesion" onclick="logout()">Cerrar sesión</button>
+            </div>            
+		</div>        
+    </div>
+	<!-- Add Modal HTML -->
+	<div id="addEmployeeModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">						
+						<h4 class="modal-title">Añadir Empleado</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<div class="form-group">
+							<label>Nombre</label>
+							<input id="Nombre" name="Nombre" type="text"  class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Apellido</label>
+							<input id="Apellido" name="Apellido" type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Teléfono</label>
+							<input id="Telefono" name="Telefono" type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Correo</label>
+							<input id="Correo" name="Correo" type="email" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Dirección</label>
+							<textarea id="Direccion" name="Direccion" class="form-control" required></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="submit" class="btn btn-success" onclick="insertData()" value="Agregar">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Edit Modal HTML -->
+	<div id="editEmployeeModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">						
+						<h4 class="modal-title">Editar Empleado</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<div class="form-group">
+							<label>Nombre</label>
+							<input id="editNombre" type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Apellido</label>
+							<input id="editApellido" type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Teléfono</label>
+							<input id="editTelefono" type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Correo</label>
+							<input id="editCorreo" type="email" class="form-control" required>
+						</div>					
+						<div class="form-group">
+							<label>Dirección</label>
+							<textarea id="editDireccion" class="form-control" required></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="submit" class="btn btn-info" onclick="updateData()"value="Guardar">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Delete Modal HTML -->
+	<div id="deleteEmployeeModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">						
+						<h4 class="modal-title">Eliminar Empleado</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<p>¿Estás seguro de que quieres eliminar a este empleado?</p>
+						<p class="text-warning"><small>Esta acción no puede ser deshecha.</small></p>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="submit" class="btn btn-danger" onclick="removeData()" value="Eliminar">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+    <script src="./js/sistemaUI.js"></script>
 </body>
 </html>
